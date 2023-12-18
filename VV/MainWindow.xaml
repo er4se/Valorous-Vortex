@@ -1,0 +1,145 @@
+﻿<Window x:Class="VV.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VV"
+        mc:Ignorable="d"
+        Title="Вход" Height="450" Width="800" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+    <!--SignIn_Main-->
+
+        <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2"
+               Margin="0, 25, 0, 0" Padding="0, 5, 5, 0"
+               Content="VALOROUS"
+               VerticalAlignment="Top"
+               FontWeight="ExtraBold" FontSize="24" FontFamily="Bahnschrift" FontStyle="Italic"/>
+
+        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2"
+               Margin="65, 15, 0, 0" Padding="0, 5, 5, 0"
+               Content="V O R T E X"
+               VerticalAlignment="Top"
+               FontWeight="ExtraBold" FontSize="32" FontFamily="Bahnschrift" FontStyle="Italic"/>
+
+        <!--Labels_of_autorization-->
+        <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2"
+               Margin="20, 10, 0, 0" Padding="0, 5, 5, 5"
+               Content="Логин:"
+               VerticalAlignment="Top"
+               FontWeight="ExtraBold" FontSize="24" FontFamily="Bahnschrift"/>
+
+        <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2"
+               Margin="20, 10, 0, 0" Padding="0, 5, 5, 5"
+               Content="Пароль:"
+               VerticalAlignment="Top"
+               FontWeight="ExtraBold" FontSize="24" FontFamily="Bahnschrift"/>
+
+        <!--TextBoxes_for_autorization-->
+        <TextBox x:Name="TextBox_Login"
+                 Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5"
+                 Margin="20, 5, 20, 5" Padding="3"
+                 VerticalAlignment="Center"
+                 FontWeight="Medium" FontSize="18" FontFamily="Bahnschrift"
+                 Background="Orange"/>
+
+        <TextBox x:Name="TextBox_Password"
+                 Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="5"
+                 Margin="20, 5, 20, 5" Padding="3"
+                 VerticalAlignment="Center"
+                 FontWeight="Medium" FontSize="18" FontFamily="Bahnschrift"
+                 Background="Orange"/>
+
+        <!--Remember_me_CheckBox-->
+        <CheckBox x:Name="CheckBox_RememberMe"
+                  Grid.Row="7" Grid.Column="0"
+                  IsChecked="False"
+                  Margin="20, 10, 0, 0">
+            <CheckBox.LayoutTransform>
+                <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+            </CheckBox.LayoutTransform>
+        </CheckBox>
+
+        <Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3"
+               Content="запомнить меня"
+               VerticalAlignment="Center"
+               Margin="45, 0, 0, 0"
+               FontWeight="Medium" FontSize="18" FontFamily="Bahnschrift"/>
+        
+        <!--SignIn_Button-->
+        <Button x:Name="Button_SignIn"
+                Click="Button_SignIn_Click"
+                Grid.Row="8" Grid.ColumnSpan="5"
+                Margin="20, 0, 20, 0" 
+                Content="Войти"
+                FontWeight="ExtraBold" FontSize="22" FontFamily="Bahnschrift"
+                Background="#E5446D" Foreground="White">
+            
+        </Button>
+        
+        <!--Regestration_Trace-->
+        <Label x:Name="Label_NoAccount"
+               MouseDoubleClick="Label_NoAccount_MouseDoubleClick"
+               Grid.Row="9" Grid.ColumnSpan="4"
+               Margin="20, 0, 0, 0"
+               VerticalAlignment="Center"
+               Content="Нет аккаунта? Зарегистрироваться"
+               FontWeight="Medium" FontSize="14" FontFamily="Bahnschrift"/>
+
+        <!--Logo-->
+        <Image Source="Resources/vv_logo_1.png" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
+
+    <!--QR_Part-->
+        
+        <!--Obst-->
+        <Rectangle Grid.Column="6" Grid.ColumnSpan="4" Grid.RowSpan="10"
+                   Fill="#2A2B2A"/>
+        
+        <!--QR_Image-->
+        <Image Source="Resources/fake_QR.png" Grid.Row="1" Grid.Column="6" Grid.RowSpan="5" Grid.ColumnSpan="4"/>
+        
+        <!--QR_Discription-->
+        <TextBlock Grid.Row="6" Grid.Column="6" Grid.ColumnSpan="4" Grid.RowSpan="2"
+                   Margin="50, 10, 50, 0"
+                   VerticalAlignment="Center" TextAlignment="Center"
+                   FontWeight="Medium" FontSize="18" FontFamily="Bahnschrift" Foreground="White">
+            
+            Войдите с помощью QR
+        </TextBlock>
+        
+        <!--Regenerate-->
+        <Button x:Name="Button_QRUpdate"
+                Click="Button_QRUpdate_Click"
+                Grid.Row="8" Grid.Column="6" Grid.ColumnSpan="4" Grid.RowSpan="1"
+                Margin="40, 0, 40, 0"
+                Content="Обновить"
+                FontWeight="Medium" FontSize="22" FontFamily="Bahnschrift"
+                Background="#E5446D" Foreground="White">
+
+        </Button>
+    </Grid>
+</Window>
