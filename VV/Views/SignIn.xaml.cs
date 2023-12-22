@@ -10,34 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace VV
+namespace VV.Views
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для SignIn.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SignIn : Window
     {
-        public MainWindow()
+        public SignIn()
         {
             InitializeComponent();
         }
 
         private void Button_SignIn_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Label_NoAccount_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void Button_QRUpdate_Click(object sender, RoutedEventArgs e)
-        {
-
+            this.Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -1,11 +1,17 @@
-﻿<Window x:Class="VV.MainWindow"
+﻿<Window x:Class="VV.Views.SignIn"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:VV"
+        xmlns:local="clr-namespace:VV.Views"
+        xmlns:viewmodel="clr-namespace:VV.ViewModels"
         mc:Ignorable="d"
         Title="Вход" Height="450" Width="800" ResizeMode="NoResize">
+
+    <Window.DataContext>
+        <viewmodel:SignIn_VM/>
+    </Window.DataContext>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -31,8 +37,8 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
-    <!--SignIn_Main-->
+
+        <!--SignIn_Main-->
 
         <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2"
                Margin="0, 25, 0, 0" Padding="0, 5, 5, 0"
@@ -61,6 +67,7 @@
 
         <!--TextBoxes_for_autorization-->
         <TextBox x:Name="TextBox_Login"
+                 Text="{Binding Path=userLogin, Mode=TwoWay}"
                  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5"
                  Margin="20, 5, 20, 5" Padding="3"
                  VerticalAlignment="Center"
@@ -68,6 +75,7 @@
                  Background="Orange"/>
 
         <TextBox x:Name="TextBox_Password"
+                 Text="{Binding Path=userPassword, Mode=TwoWay}"
                  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="5"
                  Margin="20, 5, 20, 5" Padding="3"
                  VerticalAlignment="Center"
@@ -89,21 +97,20 @@
                VerticalAlignment="Center"
                Margin="45, 0, 0, 0"
                FontWeight="Medium" FontSize="18" FontFamily="Bahnschrift"/>
-        
+
         <!--SignIn_Button-->
         <Button x:Name="Button_SignIn"
-                Click="Button_SignIn_Click"
+                Command="{Binding SignInTry}"
                 Grid.Row="8" Grid.ColumnSpan="5"
                 Margin="20, 0, 20, 0" 
                 Content="Войти"
                 FontWeight="ExtraBold" FontSize="22" FontFamily="Bahnschrift"
-                Background="#E5446D" Foreground="White">
-            
+                Background="#E5446D" Foreground="White" Click="Button_SignIn_Click">
+
         </Button>
-        
+
         <!--Regestration_Trace-->
         <Label x:Name="Label_NoAccount"
-               MouseDoubleClick="Label_NoAccount_MouseDoubleClick"
                Grid.Row="9" Grid.ColumnSpan="4"
                Margin="20, 0, 0, 0"
                VerticalAlignment="Center"
@@ -111,17 +118,17 @@
                FontWeight="Medium" FontSize="14" FontFamily="Bahnschrift"/>
 
         <!--Logo-->
-        <Image Source="Resources/vv_logo_1.png" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
+        <Image Source="../Resources/vv_logo_1.png" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
 
-    <!--QR_Part-->
-        
+        <!--QR_Part-->
+
         <!--Obst-->
         <Rectangle Grid.Column="6" Grid.ColumnSpan="4" Grid.RowSpan="10"
                    Fill="#2A2B2A"/>
-        
+
         <!--QR_Image-->
-        <Image Source="Resources/fake_QR.png" Grid.Row="1" Grid.Column="6" Grid.RowSpan="5" Grid.ColumnSpan="4"/>
-        
+        <Image Source="../Resources/fake_QR.png" Grid.Row="1" Grid.Column="6" Grid.RowSpan="5" Grid.ColumnSpan="4"/>
+
         <!--QR_Discription-->
         <TextBlock Grid.Row="6" Grid.Column="6" Grid.ColumnSpan="4" Grid.RowSpan="2"
                    Margin="50, 10, 50, 0"
@@ -130,16 +137,14 @@
             
             Войдите с помощью QR
         </TextBlock>
-        
+
         <!--Regenerate-->
         <Button x:Name="Button_QRUpdate"
-                Click="Button_QRUpdate_Click"
                 Grid.Row="8" Grid.Column="6" Grid.ColumnSpan="4" Grid.RowSpan="1"
                 Margin="40, 0, 40, 0"
                 Content="Обновить"
                 FontWeight="Medium" FontSize="22" FontFamily="Bahnschrift"
                 Background="#E5446D" Foreground="White">
-
         </Button>
     </Grid>
 </Window>
