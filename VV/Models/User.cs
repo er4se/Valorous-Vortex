@@ -5,53 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using Prism;
 using Prism.Mvvm;
+using System.Data.Entity;
+using System.Data.SqlClient;
 
 namespace VV.Models
 {
-    class User : BindableBase
+    public class User : BindableBase
     {
-        private int id = 0;
-        private string login = string.Empty;
-        private string password = string.Empty;
+        public int id { get; set; }
+        public string login { get; set; }
+        public string password { get; set; }
+        public string NickName { get; set; }
 
-        public string NickName { get; set; } = string.Empty;
-
-        public void SetUserID(int _id)
-        {
-            if (id == 0)
-            {
-                id = _id;
-                RaisePropertyChanged(nameof(id));
-            }
-        }
-
-        public void SetPassword(string _password)
-        {
-            if (password == string.Empty)
-            {
-                password = _password;
-                RaisePropertyChanged(nameof(password));
-            }
-        }
-
-        public void SetLogin(string _login)
-        {
-            if (login == string.Empty)
-            {
-                login = _login;
-                RaisePropertyChanged(nameof(login));
-            }
-        }
-
-        public void SetNickname(string _nickname)
-        {
-            if(NickName != string.Empty)
-            {
-
-            }
-
-            NickName = _nickname;
-            RaisePropertyChanged(nameof(NickName));
-        }
+        public bool IsValid => !string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password);
     }
 }

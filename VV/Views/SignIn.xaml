@@ -9,7 +9,7 @@
         Title="Вход" Height="450" Width="800" ResizeMode="NoResize">
 
     <Window.DataContext>
-        <viewmodel:SignIn_VM/>
+        <viewmodel:ValidationViewModel/>
     </Window.DataContext>
     
     <Grid>
@@ -67,7 +67,7 @@
 
         <!--TextBoxes_for_autorization-->
         <TextBox x:Name="TextBox_Login"
-                 Text="{Binding Path=userLogin, Mode=TwoWay}"
+                 Text="{Binding Path=Login, Mode=TwoWay}"
                  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5"
                  Margin="20, 5, 20, 5" Padding="3"
                  VerticalAlignment="Center"
@@ -75,7 +75,7 @@
                  Background="Orange"/>
 
         <TextBox x:Name="TextBox_Password"
-                 Text="{Binding Path=userPassword, Mode=TwoWay}"
+                 Text="{Binding Path=Password, Mode=TwoWay}"
                  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="5"
                  Margin="20, 5, 20, 5" Padding="3"
                  VerticalAlignment="Center"
@@ -100,7 +100,7 @@
 
         <!--SignIn_Button-->
         <Button x:Name="Button_SignIn"
-                Command="{Binding SignInTry}"
+                Command="{Binding LoginCommand}"
                 Grid.Row="8" Grid.ColumnSpan="5"
                 Margin="20, 0, 20, 0" 
                 Content="Войти"
@@ -140,6 +140,7 @@
 
         <!--Regenerate-->
         <Button x:Name="Button_QRUpdate"
+                Command="{Binding Check}"
                 Grid.Row="8" Grid.Column="6" Grid.ColumnSpan="4" Grid.RowSpan="1"
                 Margin="40, 0, 40, 0"
                 Content="Обновить"
