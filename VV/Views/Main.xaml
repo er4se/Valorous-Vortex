@@ -4,9 +4,62 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VV.Views"
+        xmlns:viewmodel="clr-namespace:VV.ViewModels"
         mc:Ignorable="d"
-        Title="Main" Height="450" Width="800">
+        Title="Главная страница" Height="720" Width="1280" ResizeMode="NoResize">
+
+    <Window.DataContext>
+        <viewmodel:MainViewModel/>
+    </Window.DataContext>
+
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!--Headder-Main-->
+
+        <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="1"
+                   Fill="#2A2B2A"
+                   VerticalAlignment="Top" Height="70"/>
+
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="1"
+               Content="Valorous Vortex"
+               VerticalAlignment="Center"
+               Foreground="AliceBlue"
+               FontWeight="ExtraBold" FontSize="42" FontFamily="Bahnschrift"/>
         
+        <!--Beta-Gameholder-->
+
+        <Button x:Name="Button_GameFinder"
+                Command="{Binding FindProductCommand}"
+                Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="1"
+                
+                Content="Найти"
+                FontWeight="Medium" FontSize="22" FontFamily="Bahnschrift"
+                Background="#E5446D" Foreground="White">
+        </Button>
+
     </Grid>
 </Window>

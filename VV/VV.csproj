@@ -78,7 +78,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\GameProduct.cs" />
     <Compile Include="Models\UserDbService.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SignIn_VM.cs" />
     <Compile Include="ViewModels\ValidationViewModel.cs" />
     <Compile Include="Views\SignIn.xaml.cs">
