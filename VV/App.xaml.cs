@@ -8,6 +8,7 @@ using System.Windows;
 using VV.Models;
 using System.Data.Entity;
 using VV.ViewModels;
+using VV.Views;
 
 namespace VV
 {
@@ -16,6 +17,16 @@ namespace VV
     /// </summary>
     public partial class App : Application
     {
-        
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            ValidationViewModel validationViewModel = new ValidationViewModel();
+            SignIn sign = new SignIn();
+            sign.DataContext = validationViewModel;
+
+            Current.MainWindow = sign;
+            sign.Show();
+        }
     }
 }

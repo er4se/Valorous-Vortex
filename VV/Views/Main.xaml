@@ -40,21 +40,50 @@
 
         <!--Headder-Main-->
 
-        <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="1"
-                   Fill="#2A2B2A"
-                   VerticalAlignment="Top" Height="70"/>
+        <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="10"
+                   Fill="#D2D7DF"/>
+        
+        <Rectangle Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="10" Grid.RowSpan="1"
+                   Fill="#2A2B2A"/>
+        
+        <Rectangle Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="8" Grid.RowSpan="10"
+                   Fill="#535353"/>
 
-        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="1"
+        <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                   Fill="#333333"/>
+
+        <Label Content="Logo Placeholder" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2"
+               VerticalAlignment="Center" HorizontalAlignment="Center"
+               Foreground="AliceBlue"
+               FontWeight="ExtraBold" FontSize="20" FontFamily="Bahnschrift"/>
+
+        <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="1"
                Content="Valorous Vortex"
                VerticalAlignment="Center"
                Foreground="AliceBlue"
                FontWeight="ExtraBold" FontSize="42" FontFamily="Bahnschrift"/>
-        
+
+        <Button x:Name="Button_ProfileNavigation"
+                Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="1"
+                Content="Профиль"
+                FontWeight="Medium" FontSize="22" FontFamily="Bahnschrift" IsEnabled="False" 
+                Background="#FF9914" Foreground="White">
+            
+        </Button>
+
+        <Button x:Name="Button_LibraryNavigation"
+                Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="1"
+                Content="Библиотека"
+                FontWeight="Medium" FontSize="22" FontFamily="Bahnschrift"
+                Background="#FF9914" Foreground="White" BorderThickness="0">
+
+        </Button>
+
         <!--Beta-Gameholder-->
 
         <Button x:Name="Button_GameFinder"
                 Command="{Binding FindProductCommand}"
-                Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="1"
+                Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="3" Grid.RowSpan="1"
                 
                 Content="Найти"
                 FontWeight="Medium" FontSize="22" FontFamily="Bahnschrift"

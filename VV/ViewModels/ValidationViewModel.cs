@@ -65,8 +65,13 @@ namespace VV.ViewModels
         {
             if (userDbService.ValidateUser(Login, Password))
             {
-                Main MainWindow = new Main();
-                MainWindow.Show();
+                MainViewModel mainViewModel = new MainViewModel();
+                Main main = new Main();
+
+                main.DataContext = mainViewModel;
+                main.Show();
+
+                App.Current.MainWindow.Close();
             }
             else
             {
