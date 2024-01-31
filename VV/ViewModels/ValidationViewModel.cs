@@ -65,8 +65,8 @@ namespace VV.ViewModels
         {
             if (userDbService.ValidateUser(Login, Password))
             {
-                MainViewModel mainViewModel = new MainViewModel();
-                Main main = new Main();
+                MainViewModel mainViewModel = new MainViewModel(); //Добавить функционал переноса информации по пользователю
+                Main main = new Main();                            //Например, новый метод, не знаю насколько это правильный подход
 
                 main.DataContext = mainViewModel;
                 main.Show();
