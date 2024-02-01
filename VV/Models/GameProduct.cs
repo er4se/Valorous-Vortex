@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace VV.Models
 {
-    class GameProduct
+    class GameProduct //Добавить GameProductDbService, разобраться с изображениями
     {
         public uint GameProductId { get; set; }
         public string GameProductName { get; set; }

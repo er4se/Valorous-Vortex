@@ -63,6 +63,12 @@
                Foreground="AliceBlue"
                FontWeight="ExtraBold" FontSize="42" FontFamily="Bahnschrift"/>
 
+        <Label Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="3" Grid.RowSpan="1"
+               Content="{Binding Path=CurrentUserNickname}"
+               VerticalAlignment="Center"
+               Foreground="AliceBlue"
+               FontWeight="ExtraBold" FontSize="20" FontFamily="Bahnschrift"/>
+
         <Button x:Name="Button_ProfileNavigation"
                 Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="1"
                 Content="Профиль"

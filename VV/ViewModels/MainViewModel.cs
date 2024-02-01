@@ -16,9 +16,20 @@ namespace VV.ViewModels
 {
     public partial class MainViewModel : BindableBase
     {
-        private GameProduct gameProduct = new GameProduct();
+        private GameProduct gameProduct = new GameProduct(); //Возможно надо будет перенести в более защищенное место
+        private User currentUser = new User();
 
         private string gameName;
+
+        public void UserBroadcast(User tempUser)
+        {
+            if(tempUser.IsValid) currentUser = tempUser;
+        }
+
+        public string CurrentUserNickname
+        {
+            get { return currentUser.NickName + ""; }
+        }
 
         public string GameName
         {
@@ -28,23 +39,21 @@ namespace VV.ViewModels
                 if (SetProperty(ref gameName, value))
                 {
                     RaisePropertyChanged(nameof(GameName));
-
                 }
             }
         }
 
+
+
         public MainViewModel()
         {
-            FindProductCommand = new DelegateCommand(FindProduct_OnExecute, FindProduct_CanExecute);
-            StartProductCommand = new DelegateCommand(StartProduct_OnExecute, StartProduct_CanExecute);
+            FindProductCommand = new DelegateCommand(FindProduct_OnExecute, FindProduct_CanExecute); //Поиск .exe в проводнике
+            StartProductCommand = new DelegateCommand(StartProduct_OnExecute, StartProduct_CanExecute); //Запуск процесса игры
         }
         public ICommand FindProductCommand { get; }
         public ICommand StartProductCommand { get; }
 
-        private bool FindProduct_CanExecute()
-        {
-            return true;
-        }
+        private bool FindProduct_CanExecute() => true;
 
         public void FindProduct_OnExecute()
         {
@@ -53,8 +62,8 @@ namespace VV.ViewModels
 
             if(fileDialog.ShowDialog() == true)
             {
-                string selectedFilePath = fileDialog.FileName;
-                gameProduct.GameFileDialog = fileDialog;
+                string selectedFilePath = fileDialog.FileName; //Некоторые костыли
+                gameProduct.GameFileDialog = fileDialog;       //Возможно стоит добавить конкретные методы для инициализации GameProduct
                 gameProduct.GameProductName = selectedFilePath;
 
                 try

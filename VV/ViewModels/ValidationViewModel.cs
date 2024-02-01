@@ -16,6 +16,7 @@ namespace VV.ViewModels
     class ValidationViewModel : BindableBase
     {
         private readonly UserDbService userDbService;
+        private User currentUser;
 
         private string login;
         private string password;
@@ -46,6 +47,7 @@ namespace VV.ViewModels
         }
 
         public ICommand LoginCommand { get; }
+        public ICommand RegistrationCommand { get; }
         
         public ValidationViewModel()
         {
@@ -65,8 +67,14 @@ namespace VV.ViewModels
         {
             if (userDbService.ValidateUser(Login, Password))
             {
+                userDbService.SetUserData(Login, Password);
+                currentUser = userDbService.user;
+
                 MainViewModel mainViewModel = new MainViewModel(); //Добавить функционал переноса информации по пользователю
+                mainViewModel.UserBroadcast(currentUser);
+
                 Main main = new Main();                            //Например, новый метод, не знаю насколько это правильный подход
+
 
                 main.DataContext = mainViewModel;
                 main.Show();
@@ -77,6 +85,14 @@ namespace VV.ViewModels
             {
                 MessageBox.Show("Неверный логин или пароль");
             }
+        }
+
+        private bool CanRegister() => true;
+
+        private void OnRegister()
+        {
+            UserRegistration uReg = new UserRegistration();
+            uReg.Show();
         }
     }
 }
