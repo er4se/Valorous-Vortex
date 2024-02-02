@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:VV.Views"
         xmlns:viewmodel="clr-namespace:VV.ViewModels"
         mc:Ignorable="d"
-        Title="Главная страница" Height="720" Width="1280" ResizeMode="NoResize">
+        Title="Главная страница" Height="720" Width="1280" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
     <Window.DataContext>
         <viewmodel:MainViewModel/>

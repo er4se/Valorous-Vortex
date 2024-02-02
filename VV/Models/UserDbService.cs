@@ -5,6 +5,7 @@ using System.Windows;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity.Infrastructure;
 
 namespace VV.Models
 {
@@ -39,7 +40,7 @@ namespace VV.Models
                         object id = reader.GetValue(0);
                         object nickname = reader.GetValue(1);
 
-                        user.id = Convert.ToInt32(id);          //Внос данных в User
+                        user.id = id.ToString();          //Внос данных в User
                         user.NickName = nickname.ToString();    //В будущем будет рассматриваться изменение
                         user.login = login;                     //алгоритма в сторону большей оптимизации и безопасности
                         user.password = password;
@@ -67,6 +68,41 @@ namespace VV.Models
 
                     return count > 0;
                 }
+            }
+        }
+
+        public bool isUniqueUser(string login)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM [dbo].[Users] WHERE Login = @Login", connection))
+                {
+                    command.Parameters.AddWithValue("@Login", login);
+
+                    int count = (int)command.ExecuteScalar();
+
+                    return count == 0;
+                }
+            }
+        }
+
+        public void InsertUser(User newUser)
+        {
+            string sqlExpression = "INSERT INTO [dbo].[Users] ([ID],[Login],[Password],[Nickname]) VALUES (@ID, @Login, @Password, @Nickname)";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                SqlCommand command = new SqlCommand(sqlExpression, connection);
+                command.Parameters.AddWithValue("@ID", newUser.id);
+                command.Parameters.AddWithValue("@Login", newUser.login);
+                command.Parameters.AddWithValue("@Password", newUser.password);
+                command.Parameters.AddWithValue("@Nickname", newUser.NickName);
+
+                    command.ExecuteNonQuery();
             }
         }
     }

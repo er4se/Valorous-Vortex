@@ -4,10 +4,105 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VV.Views"
-        xmlns:viewmodel="cls-namespace:VV.ViewModels"
+        xmlns:viewmodel="clr-namespace:VV.ViewModels"
         mc:Ignorable="d"
-        Title="Регистрация" Height="600" Width="400" ResizeMode="NoResize">
+        Title="Регистрация" Height="600" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+
+    <Window.DataContext>
+        <viewmodel:RegistrationViewModel/>
+    </Window.DataContext>
+    
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         
+        <!--Logo-->
+
+        <Image Source="../Resources/vv_logo_1.png" Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" Grid.ColumnSpan="3" Margin="25"/>
+        
+        <!--Reg-Controllers-->
+
+        <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Grid.RowSpan="1"
+               Content="Регистрация"
+               HorizontalAlignment="Center"
+               FontWeight="Black" FontSize="32" FontFamily="Bahnschrift"/>
+
+        <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="1"
+               Margin="25, 0, 0, 0"
+               VerticalAlignment="Bottom"
+               Content="Логин:"
+               FontWeight="Medium" FontSize="20" FontFamily="Bahnschrift" FontStyle="Italic"/>
+
+        <Label Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="1"
+               Margin="25, 0, 0, 0"
+               VerticalAlignment="Bottom"
+               Content="Псевдоним:"
+               FontWeight="Medium" FontSize="20" FontFamily="Bahnschrift" FontStyle="Italic"/>
+
+        <Label Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="1"
+               Margin="25, 0, 0, 0"
+               VerticalAlignment="Bottom"
+               Content="Пароль:"
+               FontWeight="Medium" FontSize="20" FontFamily="Bahnschrift" FontStyle="Italic"/>
+
+        <TextBox x:Name="TextBox_Login"
+                 Text="{Binding Path=NewLogin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="7"
+                 Margin="30, 0"
+                 Height="35"
+                 VerticalAlignment="Center"
+                 FontWeight="Medium" FontSize="20" FontFamily="Bahnschrift"
+                 Background="#D9D9D9"/>
+
+        <TextBox x:Name="TextBox_Nickname"
+                 Text="{Binding Path=NewNickname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="7"
+                 Margin="30, 0"
+                 Height="35"
+                 VerticalAlignment="Center"
+                 FontWeight="Medium" FontSize="20" FontFamily="Bahnschrift"
+                 Background="#D9D9D9"/>
+
+        <TextBox x:Name="TextBox_Password"
+                 Text="{Binding Path=NewPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="7"
+                 Margin="30, 0"
+                 Height="35"
+                 VerticalAlignment="Center"
+                 FontWeight="Medium" FontSize="20" FontFamily="Bahnschrift"
+                 Background="#D9D9D9"/>
+        
+        <!--Reg-Button-->
+
+        <Button x:Name="Button_Reg"
+                Command="{Binding RegistrationCommand}"
+                Grid.Row="10" Grid.ColumnSpan="7" Grid.RowSpan="2"
+                Margin="30, 15" 
+                Content="Зарегистрироваться"
+                FontWeight="ExtraBold" FontSize="24" FontFamily="Bahnschrift" BorderThickness="0"
+                Background="#E5446D" Foreground="White">
+        </Button>
+
     </Grid>
 </Window>

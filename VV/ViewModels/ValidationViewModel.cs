@@ -55,6 +55,7 @@ namespace VV.ViewModels
             this.userDbService = new UserDbService(connectionString);            
 
             LoginCommand = new DelegateCommand(OnLogin, CanLogin);
+            RegistrationCommand = new DelegateCommand(OnRegister, CanRegister);
         }
         
         private bool CanLogin()
