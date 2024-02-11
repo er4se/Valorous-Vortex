@@ -68,7 +68,7 @@
 
         <!--TextBoxes_for_autorization-->
         <TextBox x:Name="TextBox_Login"
-                 Text="{Binding Path=Login, Mode=TwoWay}"
+                 Text="{Binding Path=Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5"
                  Margin="20, 5, 20, 5" Padding="3"
                  VerticalAlignment="Center"
@@ -76,7 +76,7 @@
                  Background="Orange"/>
 
         <TextBox x:Name="TextBox_Password"
-                 Text="{Binding Path=Password, Mode=TwoWay}"
+                 Text="{Binding Path=Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="5"
                  Margin="20, 5, 20, 5" Padding="3"
                  VerticalAlignment="Center"
@@ -106,7 +106,7 @@
                 Margin="20, 0, 20, 0" 
                 Content="Войти"
                 FontWeight="ExtraBold" FontSize="22" FontFamily="Bahnschrift"
-                Background="#E5446D" Foreground="White" Click="Button_SignIn_Click">
+                Background="#E5446D" Foreground="White">
 
         </Button>
 

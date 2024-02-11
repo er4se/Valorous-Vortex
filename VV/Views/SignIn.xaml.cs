@@ -23,10 +23,5 @@ namespace VV.Views
         {
             InitializeComponent();
         }
-
-        private void Button_SignIn_Click(object sender, RoutedEventArgs e)
-        {
-            this.Visibility = Visibility.Collapsed;
-        }
     }
 }

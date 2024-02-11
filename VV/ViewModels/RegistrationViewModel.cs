@@ -16,6 +16,7 @@ namespace VV.ViewModels
     {
         private readonly UserDbService userDbService;
         private User newUser = new User();
+        public Action CloseAction { get; set; }
 
         private string newLogin;
         private string newNickname;
@@ -81,6 +82,7 @@ namespace VV.ViewModels
                 userDbService.InsertUser(newUser);
 
                 MessageBox.Show("Успешная регистрация");
+                CloseAction();
             }
             else
             {

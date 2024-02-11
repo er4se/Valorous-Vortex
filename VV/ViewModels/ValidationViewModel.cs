@@ -10,6 +10,7 @@ using VV.Models;
 using VV.Views;
 
 using System.Windows;
+using System.Windows.Data;
 
 namespace VV.ViewModels
 {
@@ -57,15 +58,17 @@ namespace VV.ViewModels
             LoginCommand = new DelegateCommand(OnLogin, CanLogin);
             RegistrationCommand = new DelegateCommand(OnRegister, CanRegister);
         }
-        
-        private bool CanLogin()
-        {
-            return true;
-        }
+
+        private bool CanLogin() => true;
             //Добавить логику от бд
 
         private void OnLogin()
         {
+            if ((login == null) || (password == null)) 
+            {
+                MessageBox.Show("Введите значения в поля логин и пароль");
+                return;
+            }
             if (userDbService.ValidateUser(Login, Password))
             {
                 userDbService.SetUserData(Login, Password);
@@ -79,7 +82,7 @@ namespace VV.ViewModels
 
                 main.DataContext = mainViewModel;
                 main.Show();
-
+ 
                 App.Current.MainWindow.Close();
             }
             else

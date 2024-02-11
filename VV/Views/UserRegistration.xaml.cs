@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VV.ViewModels;
 
 namespace VV.Views
 {
@@ -22,6 +23,12 @@ namespace VV.Views
         public UserRegistration()
         {
             InitializeComponent();
+            RegistrationViewModel registrationViewModel = new RegistrationViewModel();
+            this.DataContext = registrationViewModel;
+            if(registrationViewModel.CloseAction == null )
+            {
+                registrationViewModel.CloseAction = new Action(this.Close);
+            }
         }
     }
 }
