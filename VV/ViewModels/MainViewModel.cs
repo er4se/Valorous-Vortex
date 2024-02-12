@@ -16,20 +16,13 @@ namespace VV.ViewModels
 {
     public partial class MainViewModel : BindableBase
     {
+        private readonly GameProductDbService gameProductDbService;
+
         private GameProduct gameProduct = new GameProduct(); //Возможно надо будет перенести в более защищенное место
         private User currentUser = new User();
 
         private string gameName;
-
-        public void UserBroadcast(User tempUser)
-        {
-            if(tempUser.IsValid) currentUser = tempUser;
-        }
-
-        public string CurrentUserNickname
-        {
-            get { return currentUser.NickName + ""; }
-        }
+        private byte[] gameSplashScreen;
 
         public string GameName
         {
@@ -43,10 +36,33 @@ namespace VV.ViewModels
             }
         }
 
+        public byte[] GameSplashScreen
+        {
+            get { return gameSplashScreen; }
+            set
+            {
+                if(SetProperty(ref gameSplashScreen, value))
+                {
+                    RaisePropertyChanged(nameof(GameSplashScreen));
+                }
+            }
+        }
 
+        public void UserBroadcast(User tempUser)
+        {
+            if(tempUser.IsValid) currentUser = tempUser;
+        }
+
+        public string CurrentUserNickname
+        {
+            get { return currentUser.NickName + ""; }
+        }
 
         public MainViewModel()
         {
+            string connectionString = "server=DESKTOP-QOVSA9S;Trusted_Connection=Yes;DataBase=VVDB;";
+            this.gameProductDbService = new GameProductDbService(connectionString);
+
             FindProductCommand = new DelegateCommand(FindProduct_OnExecute, FindProduct_CanExecute); //Поиск .exe в проводнике
             StartProductCommand = new DelegateCommand(StartProduct_OnExecute, StartProduct_CanExecute); //Запуск процесса игры
         }
@@ -71,11 +87,17 @@ namespace VV.ViewModels
                     FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(selectedFilePath);
                     string programName = fileVersionInfo.ProductName;
 
+                    //GameName = programName;
+
+                    gameProductDbService.SelectGameProduct(programName);
+                    gameProduct = gameProductDbService.setGameProduct();
+
                     GameName = programName;
+                    GameSplashScreen = gameProduct.GameProductSplashScreen;
                 }
-                catch
+                catch(Exception ex)
                 {
-                    MessageBox.Show("Ошибка при получении информации");
+                    MessageBox.Show(ex.Message);
                 }
             }
         }

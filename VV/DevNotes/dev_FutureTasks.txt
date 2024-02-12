@@ -1,6 +1,8 @@
 ﻿1. [done] Разобарться с проблемой работы xaml behaviors в Registration Trace (SignIn.xaml)
 2. [done] Сделать окно регистрации пользователя с привязкой к БД
 3. Добавить алгоритм работы в CanLogin и добить его обновление после ввода данных (ValidationViewModel)
-4. Добавить userAvatar и gameSplashscreen в БД и алгоритм программы
+4. [1/2 done] Добавить userAvatar и gameSplashscreen в БД и алгоритм программы
 5. [done] Настроить закрытие окна UserRegistration после успешной регистрации (RegistrationViewModel)
 6. Верстка главного окна (Main.xaml)
+7. Добавить комментарии
+8. Исправить поведение GameSplashScreen (MainViewModel)
