@@ -87,7 +87,8 @@
 
         <!--Beta-Gameholder-->
 
-        <Image  Source="{Binding GameSplashScreen, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+        <Image  x:Name="Splashscreen"
+                Source="{Binding GameSplashScreen}"
                 Stretch="UniformToFill"
                 Grid.Column="2" Grid.Row="2" Grid.RowSpan="8" Grid.ColumnSpan="8">
             

@@ -88,9 +88,11 @@ namespace VV.ViewModels
                     string programName = fileVersionInfo.ProductName;
 
                     //GameName = programName;
-
+                    
                     gameProductDbService.SelectGameProduct(programName);
                     gameProduct = gameProductDbService.setGameProduct();
+
+                    //if (gameProduct.GameProductSplashScreen != null) MessageBox.Show("nonull");
 
                     GameName = programName;
                     GameSplashScreen = gameProduct.GameProductSplashScreen;
