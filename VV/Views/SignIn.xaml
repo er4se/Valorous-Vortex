@@ -85,8 +85,8 @@
 
         <!--Remember_me_CheckBox-->
         <CheckBox x:Name="CheckBox_RememberMe"
+                  IsChecked="{Binding Path=RememberMeIsChecked, Mode=TwoWay}"
                   Grid.Row="7" Grid.Column="0"
-                  IsChecked="False"
                   Margin="20, 10, 0, 0">
             <CheckBox.LayoutTransform>
                 <ScaleTransform ScaleX="1.5" ScaleY="1.5" />

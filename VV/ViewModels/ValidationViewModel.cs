@@ -14,13 +14,31 @@ using System.Windows.Data;
 
 namespace VV.ViewModels
 {
+    public delegate void SavedUserInfoHandler();
+
     class ValidationViewModel : BindableBase
     {
         private readonly UserDbService userDbService;
         private User currentUser;
 
-        private string login;
-        private string password;
+        private string login;    //убрать, заменить на прямое обращение к экземпляру User
+        private string password; //туда же
+
+        private bool rememberMeIsChecked = VV.Properties.Settings.Default.RememberMe;
+        private event SavedUserInfoHandler savedUserInfoHandler;
+
+        public bool RememberMeIsChecked
+        {
+            get { return rememberMeIsChecked; }
+            set
+            {
+                if(SetProperty(ref rememberMeIsChecked, value))
+                {
+                    RaisePropertyChanged(nameof(rememberMeIsChecked));
+                    VV.Properties.Settings.Default.RememberMe = value;
+                }
+            }
+        }
 
         public string Login
         {
@@ -47,13 +65,40 @@ namespace VV.ViewModels
             }
         }
 
+        private void UpdatePropertiesUserInfo() //Сохраняет данные пользователя в настройки
+        {
+            if (currentUser != null) 
+            {
+                VV.Properties.Settings.Default.UserLogin = currentUser.login;
+                VV.Properties.Settings.Default.UserPassword = currentUser.password;
+                VV.Properties.Settings.Default.Save();
+            }
+        }
+
+        private void SetSavedUserInfo() //Выполнение события
+        {
+            if (rememberMeIsChecked)
+            {
+                savedUserInfoHandler += UpdatePropertiesUserInfo;
+                savedUserInfoHandler();
+            }
+        }
+
         public ICommand LoginCommand { get; }
         public ICommand RegistrationCommand { get; }
         
         public ValidationViewModel()
         {
             string connectionString = "server=DESKTOP-QOVSA9S;Trusted_Connection=Yes;DataBase=VVDB;";
-            this.userDbService = new UserDbService(connectionString);            
+            this.userDbService = new UserDbService(connectionString);
+
+            if (rememberMeIsChecked)
+            {
+                Login = VV.Properties.Settings.Default.UserLogin;
+                Password = VV.Properties.Settings.Default.UserPassword;
+
+                //OnLogin();                                                    //<--Дополнить функционал, возможно перенести в OnStartup
+            }          
 
             LoginCommand = new DelegateCommand(OnLogin, CanLogin);
             RegistrationCommand = new DelegateCommand(OnRegister, CanRegister);
@@ -73,6 +118,8 @@ namespace VV.ViewModels
             {
                 userDbService.SetUserData(Login, Password);
                 currentUser = userDbService.user;
+
+                SetSavedUserInfo();
 
                 MainViewModel mainViewModel = new MainViewModel(); //Добавить функционал переноса информации по пользователю
                 mainViewModel.UserBroadcast(currentUser);
