@@ -9,9 +9,6 @@ using System.Windows.Input;
 using VV.Models;
 using VV.Views;
 
-using System.Windows;
-using System.Windows.Data;
-
 namespace VV.ViewModels
 {
     public delegate void SavedUserInfoHandler();
@@ -48,10 +45,8 @@ namespace VV.ViewModels
                 if(SetProperty(ref login, value))
                 {
                     RaisePropertyChanged(nameof(Login));
-                    
                 } 
             }
-        }
 
         public string Password
         {
@@ -63,30 +58,7 @@ namespace VV.ViewModels
                     RaisePropertyChanged(nameof(Password));
                 }
             }
-        }
 
-        private void UpdatePropertiesUserInfo() //Сохраняет данные пользователя в настройки
-        {
-            if (currentUser != null) 
-            {
-                VV.Properties.Settings.Default.UserLogin = currentUser.login;
-                VV.Properties.Settings.Default.UserPassword = currentUser.password;
-                VV.Properties.Settings.Default.Save();
-            }
-        }
-
-        private void SetSavedUserInfo() //Выполнение события
-        {
-            if (rememberMeIsChecked)
-            {
-                savedUserInfoHandler += UpdatePropertiesUserInfo;
-                savedUserInfoHandler();
-            }
-        }
-
-        public ICommand LoginCommand { get; }
-        public ICommand RegistrationCommand { get; }
-        
         public ValidationViewModel()
         {
             string connectionString = "server=DESKTOP-QOVSA9S;Trusted_Connection=Yes;DataBase=VVDB;";
@@ -105,7 +77,6 @@ namespace VV.ViewModels
         }
 
         private bool CanLogin() => true;
-            //Добавить логику от бд
 
         private void OnLogin()
         {
