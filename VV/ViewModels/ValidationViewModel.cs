@@ -18,9 +18,6 @@ namespace VV.ViewModels
         private readonly UserDbService userDbService;
         private User currentUser;
 
-        private string login;    //убрать, заменить на прямое обращение к экземпляру User
-        private string password; //туда же
-
         private bool rememberMeIsChecked = VV.Properties.Settings.Default.RememberMe;
         private event SavedUserInfoHandler savedUserInfoHandler;
 
