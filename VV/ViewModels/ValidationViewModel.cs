@@ -89,15 +89,6 @@ namespace VV.ViewModels
 
                 SetSavedUserInfo();
 
-                MainViewModel mainViewModel = new MainViewModel(); //Добавить функционал переноса информации по пользователю
-                mainViewModel.UserBroadcast(currentUser);
-
-                Main main = new Main();                            //Например, новый метод, не знаю насколько это правильный подход
-
-
-                main.DataContext = mainViewModel;
-                main.Show();
- 
                 App.Current.MainWindow.Close();
             }
             else
