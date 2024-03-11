@@ -1,13 +1,13 @@
-﻿using Prism.Commands;
+﻿using System.Windows.Input;
+using System.Windows.Data;
+using System.Windows;
+
+using Prism.Commands;
 using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+
 using VV.Models;
 using VV.Views;
+using System.Threading.Tasks;
 
 namespace VV.ViewModels
 {
@@ -16,10 +16,13 @@ namespace VV.ViewModels
     class ValidationViewModel : BindableBase
     {
         private readonly UserDbService userDbService;
-        private User currentUser;
+        private User currentUser = new User();
 
         private bool rememberMeIsChecked = VV.Properties.Settings.Default.RememberMe;
         private event SavedUserInfoHandler savedUserInfoHandler;
+
+        public ICommand LoginCommand { get; }
+        public ICommand RegistrationCommand { get; }
 
         public bool RememberMeIsChecked
         {
@@ -36,26 +39,24 @@ namespace VV.ViewModels
 
         public string Login
         {
-            get { return login; }
+            get { return currentUser.login; }
             set 
             {
-                if(SetProperty(ref login, value))
-                {
-                    RaisePropertyChanged(nameof(Login));
-                } 
+                currentUser.login = value;
+                RaisePropertyChanged(nameof(Login));
             }
+        }
 
         public string Password
         {
-            get { return password; }
+            get { return currentUser.password; }
             set
             {
-                if (SetProperty(ref password, value))
-                {
-                    RaisePropertyChanged(nameof(Password));
-                }
+                currentUser.password = value;
+                RaisePropertyChanged(nameof(Password));
             }
-
+        }
+        
         public ValidationViewModel()
         {
             string connectionString = "server=DESKTOP-QOVSA9S;Trusted_Connection=Yes;DataBase=VVDB;";
@@ -66,29 +67,36 @@ namespace VV.ViewModels
                 Login = VV.Properties.Settings.Default.UserLogin;
                 Password = VV.Properties.Settings.Default.UserPassword;
 
-                //OnLogin();                                                    //<--Дополнить функционал, возможно перенести в OnStartup
+                LoginWhenChecked();
             }          
 
             LoginCommand = new DelegateCommand(OnLogin, CanLogin);
             RegistrationCommand = new DelegateCommand(OnRegister, CanRegister);
         }
 
+        async private void LoginWhenChecked()                                           //Временное решение, дает время отработать show в App.xaml.cs
+        {
+            await Task.Delay(1000);
+            OnLogin();
+        }
+
         private bool CanLogin() => true;
 
         private void OnLogin()
         {
-            if ((login == null) || (password == null)) 
+            if (isCurrentUserNull()) 
             {
                 MessageBox.Show("Введите значения в поля логин и пароль");
                 return;
             }
             if (userDbService.ValidateUser(Login, Password))
             {
-                userDbService.SetUserData(Login, Password);
-                currentUser = userDbService.user;
+                userDbService.SetUserData(Login, Password);                             //Лишний эксзепляр currentUser, нигде не используется по назначению
+                currentUser = userDbService.user;                                       
 
                 SetSavedUserInfo();
-
+                CreateMainWindow(currentUser);
+ 
                 App.Current.MainWindow.Close();
             }
             else
@@ -101,8 +109,40 @@ namespace VV.ViewModels
 
         private void OnRegister()
         {
-            UserRegistration uReg = new UserRegistration();
-            uReg.Show();
+            UserRegistration userRegistrationInstance = new UserRegistration();
+            userRegistrationInstance.Show();
+        }
+
+        private void UpdatePropertiesUserInfo()                                         //Сохраняет данные пользователя в настройки
+        {
+            if (!isCurrentUserNull()) 
+            {
+                VV.Properties.Settings.Default.UserLogin = currentUser.login;
+                VV.Properties.Settings.Default.UserPassword = currentUser.password;
+                VV.Properties.Settings.Default.Save();
+            }
+        }
+
+        private void SetSavedUserInfo()                                                 //Выполнение событие установки сохраненных данных
+        {
+            if (rememberMeIsChecked)
+            {
+                savedUserInfoHandler += UpdatePropertiesUserInfo;
+                savedUserInfoHandler();
+            }
+        }
+
+        private bool isCurrentUserNull() => currentUser == null;
+
+        private void CreateMainWindow(User currentUser)
+        {
+            MainViewModel mainViewModel = new MainViewModel();
+            mainViewModel.UserBroadcast(currentUser);
+
+            Main main = new Main();
+
+            main.DataContext = mainViewModel;
+            main.Show();
         }
     }
 }

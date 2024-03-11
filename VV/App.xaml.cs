@@ -22,7 +22,7 @@ namespace VV
             base.OnStartup(e);
 
             ValidationViewModel validationViewModel = new ValidationViewModel();
-            SignIn sign = new SignIn();
+            ValidationWindow sign = new ValidationWindow();
             sign.DataContext = validationViewModel;
 
             Current.MainWindow = sign;

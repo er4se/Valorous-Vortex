@@ -8,43 +8,40 @@ using VV.Models;
 
 namespace VV.ViewModels
 {
-    internal class RegistrationViewModel : BindableBase
+    class RegistrationViewModel : BindableBase                                      //ViewModel механики регистрации пользователя
     {
-        private readonly UserDbService userDbService;
-        private User newUser = new User();
+        private readonly UserDbService userDbService;                               //Для сопоставления данных используется прямое обращение к БД
+        private User newCreatedUser = new User();
         public Action CloseAction { get; set; }
+        public ICommand RegistrationCommand { get; }
 
         public string NewLogin
         {
-            get { return newLogin; }
+            get { return newCreatedUser.login; }
             set
             {
-                if(SetProperty(ref newLogin, value))
-                {
-                    RaisePropertyChanged(nameof(newLogin));
-                }
+                newCreatedUser.login = value;
+                RaisePropertyChanged(nameof(NewLogin));
             }
+        }
 
         public string NewNickname
         {
-            get { return newNickname; }
+            get { return newCreatedUser.NickName; }
             set
             {
-                if (SetProperty(ref newNickname, value))
-                {
-                    RaisePropertyChanged(nameof(newNickname));
-                }
+                newCreatedUser.NickName = value;
+                RaisePropertyChanged(nameof(NewNickname));              
             }
+        }
 
         public string NewPassword
         {
-            get { return newPassword; }
+            get { return newCreatedUser.password; }
             set
             {
-                if (SetProperty(ref newPassword, value))
-                {
-                    RaisePropertyChanged(nameof(newPassword));
-                }
+                newCreatedUser.password = value;
+                RaisePropertyChanged(nameof(NewPassword));
             }
         }
 
@@ -59,17 +56,15 @@ namespace VV.ViewModels
 
         private bool CanRegister() => true;
 
-        private void OnRegister()
-        {
-            if(userDbService.isUniqueUser(newLogin))
+        async private void OnRegister()                                             //При инициализации регистрации инициализируется процедура проверки
+        {                                                                           //созданная предварительно в качестве метода класса UserDbService
+            if (userDbService.isUniqueUser(newCreatedUser.login))                   //При успешной уникальности логина пользователя
             {
-                newUser.login = newLogin;
-                newUser.password = newPassword;
-                newUser.NickName = newNickname;
-                newUser.id = Guid.NewGuid().ToString("N");
-
-                userDbService.InsertUser(newUser);
-
+                await Task.Run(() =>
+                {                                                                   //генерируется ID нового пользователя, полные данные экземпляра
+                    newCreatedUser.id = GenerateUserID();                           //нового пользователя отправляются в базу данных по средствам
+                    userDbService.InsertUser(newCreatedUser);                       //специально созданного метода InsertUser в классе UserDbService
+                });
                 MessageBox.Show("Успешная регистрация");
                 CloseAction();
             }
@@ -79,5 +74,6 @@ namespace VV.ViewModels
             }
         }
 
+        private string GenerateUserID() => Guid.NewGuid().ToString("N");            //Генератор ID пользователя
     }
 }

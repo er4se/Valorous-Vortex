@@ -5,8 +5,4 @@
 5. [done] Настроить закрытие окна UserRegistration после успешной регистрации (RegistrationViewModel)
 6. Верстка главного окна (Main.xaml)
 7. Добавить комментарии
-8. Исправить поведение GameSplashScreen (MainViewModel)
-
-Костыли
-1. Подгружать SplashScreen в Resources
-1.1. Попробовать выгрузить в отдельную директорию полученное из БД изображение, проверить работоспособность выгрузки
+8. [done] Исправить поведение GameSplashScreen (MainViewModel)

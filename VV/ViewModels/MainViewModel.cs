@@ -11,6 +11,7 @@ using System.Windows.Input;
 using Prism.Commands;
 using Prism.Mvvm;
 using VV.Models;
+using System.Collections.ObjectModel;
 
 namespace VV.ViewModels
 {
@@ -18,33 +19,37 @@ namespace VV.ViewModels
     {
         private readonly GameProductDbService gameProductDbService;
 
+        private ObservableCollection<GameProduct> gameProducts;
+        public ObservableCollection<GameProduct> GameProducts
+        {
+            get { return gameProducts; }
+            set
+            {
+                gameProducts = value;
+                RaisePropertyChanged(nameof(GameProducts));
+            }
+        }
+
         private GameProduct gameProduct = new GameProduct(); //Возможно надо будет перенести в более защищенное место
         private User currentUser = new User();
 
-        private string gameName;
-        private byte[] gameSplashScreen;
-
         public string GameName
         {
-            get { return gameName; }
+            get { return gameProduct.GameProductName; }
             set
             {
-                if (SetProperty(ref gameName, value))
-                {
-                    RaisePropertyChanged(nameof(GameName));
-                }
+                gameProduct.GameProductName = value;
+                RaisePropertyChanged(nameof(GameName));
             }
         }
 
         public byte[] GameSplashScreen
         {
-            get { return gameSplashScreen; }
+            get { return gameProduct.GameProductSplashScreen; }
             set
             {
-                if(SetProperty(ref gameSplashScreen, value))
-                {
-                    RaisePropertyChanged(nameof(GameSplashScreen));
-                }
+                gameProduct.GameProductSplashScreen = value;
+                RaisePropertyChanged(nameof(GameSplashScreen));
             }
         }
 
@@ -95,7 +100,9 @@ namespace VV.ViewModels
                     //if (gameProduct.GameProductSplashScreen != null) MessageBox.Show("nonull");
 
                     GameName = programName;
-                    GameSplashScreen = gameProduct.GameProductSplashScreen;
+
+                    if(gameProduct.GameProductSplashScreen != null) 
+                        GameSplashScreen = gameProduct.GameProductSplashScreen;
                 }
                 catch(Exception ex)
                 {

@@ -84,11 +84,11 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\ValidationViewModel.cs" />
-    <Compile Include="Views\SignIn.xaml.cs">
-      <DependentUpon>SignIn.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\UserRegistration.xaml.cs">
       <DependentUpon>UserRegistration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ValidationWindow.xaml.cs">
+      <DependentUpon>ValidationWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\Main.xaml">
       <SubType>Designer</SubType>
@@ -101,11 +101,11 @@
     <Compile Include="Views\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\SignIn.xaml">
+    <Page Include="Views\UserRegistration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserRegistration.xaml">
+    <Page Include="Views\ValidationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace VV.Views
 {
     /// <summary>
-    /// Логика взаимодействия для SignIn.xaml
+    /// Логика взаимодействия для ValidationWindow.xaml
     /// </summary>
-    public partial class SignIn : Window
+    public partial class ValidationWindow : Window
     {
-        public SignIn()
+        public ValidationWindow()
         {
             InitializeComponent();
         }
